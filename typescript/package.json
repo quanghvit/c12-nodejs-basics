@@ -1,0 +1,17 @@
+{
+  "name": "typescript_source",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "quanghv",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node index.ts"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
