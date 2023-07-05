@@ -1,19 +1,18 @@
 import {
+    BaseEntity,
     CreateDateColumn,
     UpdateDateColumn,
     PrimaryGeneratedColumn,
-    BaseEntity,
 } from 'typeorm';
 
 export default abstract class BaseModel extends BaseEntity {
-
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @CreateDateColumn()
-    created_at: Date;
+    @CreateDateColumn({ name: 'created_at' })
+    createdAt: Date;
 
-    @UpdateDateColumn()
-    updated_at: Date;
+    @UpdateDateColumn({ name: 'updated_at' })
+    updatedAt: Date;
 }
 

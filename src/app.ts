@@ -1,11 +1,10 @@
 require('dotenv').config();
-import express, { Express, Response } from 'express';
-const bodyParser = require('body-parser');
-import { AppDataSource } from './utils/data.source';
 import cors from 'cors';
 import morgan from 'morgan';
-
-import userRouter from './routes/user.routes';
+import { appRouter } from './routes';
+const bodyParser = require('body-parser');
+import { AppDataSource } from './utils/data.source';
+import express, { Express, Response } from 'express';
 
 AppDataSource
     .initialize()
@@ -25,7 +24,7 @@ AppDataSource
         // app.use(express.json({ limit: '10kb' }));
 
         // Cors
-        // app.use(cors({ origin: '*', credentials: true }));
+        app.use(cors({ origin: '*', credentials: true }));
 
         console.log('process.env.NODE_ENV', process.env.NODE_ENV)
         if (process.env.NODE_ENV === 'development') {
@@ -38,7 +37,7 @@ AppDataSource
         });
 
         // Routes
-        app.use('/api/v1/users', userRouter);
+        appRouter(app);
 
         const port = process.env.PORT || 8080;
         app.listen(port, () => {
