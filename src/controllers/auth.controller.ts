@@ -9,7 +9,6 @@ import { createUser, findUserByEmail } from "../services/user.service";
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        // TODO: validate body
         const { email, password } = req.body;
 
         const user = await findUserByEmail(email);
@@ -42,12 +41,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { name, email, password } = req.body;
-
-        // validate body
-        // TODO: use zod
-        if (!name || !email || !password)
-            return handleError(res, StatusCodes.BAD_REQUEST, 'Body invalid');
+        const { email } = req.body;
 
         // validate user existence
         const user = await findUserByEmail(email);

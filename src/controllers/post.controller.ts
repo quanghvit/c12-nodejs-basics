@@ -1,3 +1,10 @@
+import {
+    findPostById,
+    listUserPosts,
+    createPostTransaction,
+    deletePostTransaction,
+    updatePostTransaction,
+} from "../services/post.service";
 import { randomUUID } from "crypto";
 import { User } from "../entities/users.entity";
 import { StatusCodes } from "http-status-codes";
@@ -6,7 +13,6 @@ import { Post } from "../entities/posts.entity";
 import { CreatePostInput } from "../schemas/post.schema";
 import { NextFunction, Request, Response } from "express";
 import { UsersPosts } from "../entities/usersPosts.entity";
-import { createPostTransaction, deletePostTransaction, findPostById, listUserPosts, updatePostTransaction } from "../services/post.service";
 
 export const create = async (req: Request, res: Response, next: NextFunction) => {
     try {
