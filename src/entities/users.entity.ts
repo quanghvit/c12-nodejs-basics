@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import BaseModel from './base.entity';
 import { UsersPosts } from './usersPosts.entity';
-import { Entity, Column, BeforeInsert, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, BeforeInsert, OneToMany, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('users')
 export class User extends BaseModel {
@@ -22,12 +22,12 @@ export class User extends BaseModel {
 
     // relations
     @Column({ name: 'created_by', type: 'uuid' , nullable: true })
-    @OneToOne(() => User)
-    @JoinColumn({ name: 'created_by' })
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'created_by', referencedColumnName: 'id' })
     createdBy: User | string;
 
     @Column({ name: 'updated_by', type: 'uuid', nullable: true })
-    @OneToOne(() => User)
+    @ManyToOne(() => User)
     @JoinColumn({ name: 'updated_by', referencedColumnName: 'id' })
     updatedBy: User | string;
 

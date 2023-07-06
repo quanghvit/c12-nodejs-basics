@@ -1,7 +1,7 @@
 import BaseModel from './base.entity';
 import { User } from './users.entity';
-import { Entity, Column, OneToMany, JoinColumn } from 'typeorm';
 import { UsersPosts } from './usersPosts.entity';
+import { Entity, Column, OneToMany, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('posts')
 export class Post extends BaseModel {
@@ -9,13 +9,17 @@ export class Post extends BaseModel {
     htmlCode: string;
 
     @Column({ name: 'is_delete', type: 'boolean', nullable: false, default: false })
-    isDelete: boolean;
+    isDeleted: boolean;
 
     @Column({ name: 'created_by', type: 'uuid' })
-    createdBy: User;    
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'created_by', referencedColumnName: 'id' })
+    createdBy: User | string;    
 
-    @Column({ name: 'updated_by', type: 'uuid' })
-    updatedBy: User;
+    @Column({ name: 'updated_by', type: 'uuid', nullable: true })
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'updated_by', referencedColumnName: 'id' })
+    updatedBy: User | string;
 
     // relations
     @OneToMany(() => UsersPosts, userPosts => userPosts.post)

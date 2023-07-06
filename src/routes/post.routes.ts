@@ -2,9 +2,8 @@ import {
     create,
     update,
     getById,
-    hardDelete,
-    softDelete,
     listMyPosts,
+    deletePost,
 } from '../controllers/post.controller';
 import {
     getPostSchema,
@@ -34,10 +33,10 @@ router
 
 router
     .route('/:id/soft')
-    .delete(zodValidator(deletePostSchema), softDelete)
+    .delete(zodValidator(deletePostSchema), deletePost(true))
 
 router
     .route('/:id/hard')
-    .delete(zodValidator(deletePostSchema), hardDelete)
+    .delete(zodValidator(deletePostSchema), deletePost(false))
 
 export const postRouter = router;

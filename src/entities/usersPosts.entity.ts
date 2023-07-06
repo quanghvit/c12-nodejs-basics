@@ -15,10 +15,10 @@ export class UsersPosts extends BaseModel {
     isDeleted: boolean;
 
     @Column({ name: 'created_by', type: 'uuid' })
-    createdBy: User;
+    createdBy: User | string;
 
     @Column({ name: 'updated_by', type: 'uuid' })
-    updatedBy: User;    
+    updatedBy: User | string;
 
     // relations
     @ManyToOne(() => User)
