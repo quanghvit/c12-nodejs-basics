@@ -6,7 +6,18 @@ const params = {
   })
 };
 
-export const createPostSchema = object({
+export const loginSchema = object({
+  body: object({
+    email: string({
+      required_error: 'Email is required',
+    }),
+    password: string({
+      required_error: 'Password is required',
+    }),
+  })
+})
+
+export const createUserSchema = object({
   body: object({
     name: string({
       required_error: 'Name is required',
@@ -21,7 +32,7 @@ export const createPostSchema = object({
   }),
 });
 
-export const updatePostSchema = object({
+export const updateUserSchema = object({
   ...params,
   body: object({
     name: string(),
@@ -29,5 +40,6 @@ export const updatePostSchema = object({
   }).partial(),
 });
 
-export type CreatePostInput = TypeOf<typeof createPostSchema>['body'];
-export type UpdatePostSchema = TypeOf<typeof updatePostSchema>['params'];
+export type LoginInput = TypeOf<typeof loginSchema>['body'];
+export type CreateUserInput = TypeOf<typeof createUserSchema>['body'];
+export type UpdateUserSchema = TypeOf<typeof updateUserSchema>['params'];

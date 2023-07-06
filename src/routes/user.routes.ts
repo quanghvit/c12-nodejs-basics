@@ -1,10 +1,12 @@
 import {
     getMe,
     getUserById,
-    createPostHandler,
+    createUserHandler,
 } from '../controllers/user.controller';
 import express from 'express';
 import { requireAuth } from '../middlewares/requireAuth';
+import { zodValidator } from '../middlewares/zodValidator';
+import { createUserSchema } from '../schemas/user.schema';
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ router.use(requireAuth);
 // routes
 router
     .route('/')
-    .post(createPostHandler);
+    .post(zodValidator(createUserSchema), createUserHandler);
 
 router
     .route('/me')

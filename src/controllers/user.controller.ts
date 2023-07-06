@@ -26,7 +26,7 @@ export const getMe = async (
   }
 }
 
-export const createPostHandler = async (
+export const createUserHandler = async (
   req: Request,
   res: Response,
   next: NextFunction

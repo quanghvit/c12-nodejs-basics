@@ -6,6 +6,7 @@ import { AppConstants } from './const';
 const bodyParser = require('body-parser');
 import { AppDataSource } from './utils/data.source';
 import express, { Express, Response } from 'express';
+import { errorHandler } from './middlewares/errorHandler';
 
 AppDataSource
     .initialize()
@@ -39,6 +40,9 @@ AppDataSource
 
         // Routes
         appRouter(app);
+
+        // use ErrorHandler middleware
+        app.use(errorHandler);
 
         const port = AppConstants.app.port || 8080;
         app.listen(port, () => {
