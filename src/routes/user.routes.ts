@@ -1,4 +1,5 @@
 import {
+    getMe,
     getUserById,
     createPostHandler,
 } from '../controllers/user.controller';
@@ -14,6 +15,10 @@ router.use(requireAuth);
 router
     .route('/')
     .post(createPostHandler);
+
+router
+    .route('/me')
+    .get(getMe);
 
 router
     .route('/:id')

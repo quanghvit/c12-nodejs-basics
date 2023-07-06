@@ -1,12 +1,13 @@
 require('dotenv').config();
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+import { AppConstants } from '../const';
 
-const port = process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432;
-const host = process.env.DB_HOST || 'localhost';
-const database = process.env.DB_NAME || 'postgres';
-const username = process.env.DB_USER || 'postgres';
-const password = process.env.DB_PASS || '123456';
+const port = AppConstants.pg.port;
+const host = AppConstants.pg.host;
+const database = AppConstants.pg.db;
+const username = AppConstants.pg.user;
+const password = AppConstants.pg.pass;
 
 export const AppDataSource = new DataSource({
   host,
@@ -16,7 +17,7 @@ export const AppDataSource = new DataSource({
   database,
   type: 'postgres',
   synchronize: true,
-  logging: true,
+  logging: false,
   logger: 'advanced-console',
   entities: ['src/entities/**/*.entity{.ts,.js}'],
   migrations: ['src/migrations/**/*{.ts,.js}'],

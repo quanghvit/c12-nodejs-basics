@@ -40,5 +40,9 @@ export class User extends BaseModel {
     async hashPassword() {
         this.password = await bcrypt.hash(this.password, 12);
     }
+
+    validateHashedPassword(unencryptedPassword: string) {
+        return bcrypt.compareSync(unencryptedPassword, this.password);
+    }
 }
 

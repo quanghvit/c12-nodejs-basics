@@ -2,6 +2,7 @@ require('dotenv').config();
 import cors from 'cors';
 import morgan from 'morgan';
 import { appRouter } from './routes';
+import { AppConstants } from './const';
 const bodyParser = require('body-parser');
 import { AppDataSource } from './utils/data.source';
 import express, { Express, Response } from 'express';
@@ -26,7 +27,7 @@ AppDataSource
         // Cors
         app.use(cors({ origin: '*', credentials: true }));
 
-        console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+        console.log('process.env.NODE_ENV', AppConstants.app.nodeEnv)
         if (process.env.NODE_ENV === 'development') {
             app.use(morgan(':method :url :status :response-time ms'));
         }
@@ -39,7 +40,7 @@ AppDataSource
         // Routes
         appRouter(app);
 
-        const port = process.env.PORT || 8080;
+        const port = AppConstants.app.port || 8080;
         app.listen(port, () => {
             console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
         });
